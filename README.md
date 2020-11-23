@@ -50,6 +50,21 @@ Remember to output files to the target directory with boot's built-in `target` t
 $ boot codox target
 ```
 
+### With `deps.edn` (& `tools.deps`)
+
+With more recent versions of the Clojure CLI tooling (at least `1.10.727`) you can add the following alias to your `deps.edn`:
+
+```
+ :aliases {...
+           :codox {:extra-deps {codox/codox {:mvn/version "0.10.7"}}
+                   :exec-fn codox.main/generate-docs
+                   :exec-args {:language :clojure
+                               :output-path "docs"}}}
+```
+
+From there, you can run `clj -X:codox` to generate documentation for your project. Note that whatever you specify in `:exec-args` above will be passed to `codox.main/generate-docs`.
+
+
 ## Breaking Changes in 0.9
 
 In preparation for a 1.0 release, Codox 0.9 has a number of breaking
